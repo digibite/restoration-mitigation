@@ -3,7 +3,8 @@ const isProd = process.env.NODE_ENV === 'production'
 const isGithubPages = process.env.PAGES_BASE_PATH
 
 const nextConfig = {
-  output: 'export',
+  // Only use static export for production builds (GitHub Pages)
+  ...(isProd && { output: 'export' }),
   trailingSlash: true,
   images: {
     unoptimized: true,
