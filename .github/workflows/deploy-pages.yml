@@ -1,8 +1,8 @@
-name: Deploy Next.js to GitHub Pages
+name: Deploy to GitHub Pages
+
 on:
   push:
-    branches: [ "main" ]
-  workflow_dispatch:
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -16,23 +16,23 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PAGES_BASE_PATH: restoration-mitigation
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
           cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
       
-      - name: Build static site
+      - name: Build
         run: npm run build
+        env:
+          PAGES_BASE_PATH: restoration-mitigation
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
-const repo = process.env.PAGES_BASE_PATH
-  ? `/${process.env.PAGES_BASE_PATH}`
-  : "";
+const isProd = process.env.NODE_ENV === 'production'
+const isGithubPages = process.env.PAGES_BASE_PATH
+
 const nextConfig = {
-  output: "export",
-  basePath: repo,
-  assetPrefix: repo ? `${repo}/` : "",
+  output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-};
-module.exports = nextConfig;
+  assetPrefix: isGithubPages ? `/${process.env.PAGES_BASE_PATH}/` : '',
+  basePath: isGithubPages ? `/${process.env.PAGES_BASE_PATH}` : '',
+}
+
+module.exports = nextConfig
