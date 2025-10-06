@@ -16,6 +16,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PAGES_BASE_PATH: restoration-mitigation
     steps:
       - name: Checkout
         uses: actions/checkout@v4
